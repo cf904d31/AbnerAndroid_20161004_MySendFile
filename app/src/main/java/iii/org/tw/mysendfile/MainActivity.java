@@ -1,6 +1,7 @@
 package iii.org.tw.mysendfile;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     MultipartUtility mu = new MultipartUtility("http://data.coa.gov.tw/Service/OpenData/EzgoAttractions.aspx","UTF-8");
                     List<String> ret = mu.finish();
                     for (String line : ret){
-                        Log.v("brad", line.length() + ":" + line);
+                        Log.d("Abner", line.length() + ":" + line);
                     }
                     handler.sendEmptyMessage(0);
                 } catch (IOException e) {
@@ -84,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void camera(View v) {
-
+        Intent it = new Intent(this,CameraActivity.class);
+        startActivity(it);
     }
 
     private class UIHandler extends Handler {
