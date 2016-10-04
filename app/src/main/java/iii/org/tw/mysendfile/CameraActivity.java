@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import java.util.List;
+
 public class CameraActivity extends AppCompatActivity {
     private Camera camera;
     private FrameLayout fram;
@@ -32,6 +34,18 @@ public class CameraActivity extends AppCompatActivity {
         //-----取得Camera物件實體
         camera = Camera.open();
         Camera.Parameters params = camera.getParameters();
+
+        //-----設定
+        List<Camera.Size> sizes = params.getSupportedPictureSizes();
+        for (Camera.Size size :sizes){
+            Log.d("Abner", size.width + "x" +size.height);
+        }
+
+        params.setPictureSize(160,120);
+        camera.setParameters(params);
+
+
+
 
         fram = (FrameLayout) findViewById(R.id.fram);
         fram.setOnClickListener(new View.OnClickListener() {
