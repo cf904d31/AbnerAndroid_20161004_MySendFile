@@ -3,6 +3,7 @@ package iii.org.tw.mysendfile;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private File sdroot;
@@ -42,6 +44,23 @@ public class MainActivity extends AppCompatActivity {
                     MultipartUtility mu = new MultipartUtility("http://www.brad.tw/iii2003/upload.php","UTF-8");
                     mu.addFilePart("upload", new File(sdroot.getAbsolutePath() + "/Abner.txt"));
                     mu.finish();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    public void getData(View v) {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    MultipartUtility mu = new MultipartUtility("http://m.coa.gov.tw/OpenData/FarmerMarketData.aspx","UTF-8");
+                    List<String> ret = mu.finish();
+                    for (String line : ret){
+                        Log.v("brad", line.length() + ":" + line);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

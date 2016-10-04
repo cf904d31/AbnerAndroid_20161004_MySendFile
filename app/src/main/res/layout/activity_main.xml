@@ -13,4 +13,9 @@
         android:layout_height="wrap_content"
         android:text="Send File"
         android:onClick="sendFile"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get File"
+        android:onClick="getData"/>
 </LinearLayout>
