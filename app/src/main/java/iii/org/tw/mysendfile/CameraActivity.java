@@ -1,6 +1,7 @@
 package iii.org.tw.mysendfile;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.support.v4.app.ActivityCompat;
@@ -36,7 +37,7 @@ public class CameraActivity extends AppCompatActivity {
         fram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                camera.takePicture(new shutter(),null,new MyJPEGCallBack());
             }
         });
         preview = new CameraPreview(this,camera);
@@ -61,6 +62,26 @@ public class CameraActivity extends AppCompatActivity {
 //            //-----取得照片後要做的事情
 //        }
 //    }
+
+
+    private class shutter implements Camera.ShutterCallback {
+        @Override
+        public void onShutter() {
+            //-----當按下快門時發生的事情
+            Log.d("Abner","按下快門");
+        }
+    }
+
+    private class MyJPEGCallBack implements Camera.PictureCallback {
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            //-----取得照片後要做的事情
+            Intent it = new Intent();
+            it.putExtra("pic",data);
+            setResult(1,it);
+            finish();
+        }
+    }
 
     private int checkCameraNumber(){
         //-----因為在Manifest檔裡面已經有宣告沒有相機的手機無法下載此程式
