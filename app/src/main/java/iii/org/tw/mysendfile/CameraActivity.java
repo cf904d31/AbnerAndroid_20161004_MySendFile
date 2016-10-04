@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class CameraActivity extends AppCompatActivity {
+    private Camera camera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,30 @@ public class CameraActivity extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int num = Camera.getNumberOfCameras();
         Log.d("Abner","Camera : " +num);
+
+        //-----取得Camera物件實體
+        camera = Camera.open();
+        Camera.Parameters params = camera.getParameters();
+
+//        //-----底下兩行搭配下面兩個class使用
+//        camera.takePicture(new shutter(),null,new MyJPEGCallBack());
+//        camera.release();
+
     }
+
+//    private class shutter implements Camera.ShutterCallback {
+//        @Override
+//        public void onShutter() {
+//            //-----當按下快門時發生的事情
+//        }
+//    }
+//
+//    private class MyJPEGCallBack implements Camera.PictureCallback {
+//        @Override
+//        public void onPictureTaken(byte[] data, Camera camera) {
+//            //-----取得照片後要做的事情
+//        }
+//    }
 
     private int checkCameraNumber(){
         //-----因為在Manifest檔裡面已經有宣告沒有相機的手機無法下載此程式
