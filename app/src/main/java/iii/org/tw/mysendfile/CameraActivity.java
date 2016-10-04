@@ -8,9 +8,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
 
 public class CameraActivity extends AppCompatActivity {
     private Camera camera;
+    private FrameLayout fram;
+    private CameraPreview preview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,16 @@ public class CameraActivity extends AppCompatActivity {
         //-----取得Camera物件實體
         camera = Camera.open();
         Camera.Parameters params = camera.getParameters();
+
+        fram = (FrameLayout) findViewById(R.id.fram);
+        fram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        preview = new CameraPreview(this,camera);
+        fram.addView(preview);
 
 //        //-----底下兩行搭配下面兩個class使用
 //        camera.takePicture(new shutter(),null,new MyJPEGCallBack());
