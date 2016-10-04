@@ -6,6 +6,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Add File"
+        android:onClick="addFile"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Send File"
         android:onClick="sendFile"/>
 </LinearLayout>
